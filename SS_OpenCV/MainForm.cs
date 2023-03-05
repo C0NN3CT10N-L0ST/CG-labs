@@ -241,5 +241,17 @@ namespace CG_OpenCV
 
             Cursor = Cursors.Default;
         }
+
+        private void translationToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (img == null)
+                return;
+
+            Cursor = Cursors.WaitCursor;
+
+            // copy Undo image
+            imgUndo = img.Copy();
+
+            
+        }
     }
 }

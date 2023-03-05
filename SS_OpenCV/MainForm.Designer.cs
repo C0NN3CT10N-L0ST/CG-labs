@@ -202,8 +202,9 @@
             // translationToolStripMenuItem
             // 
             this.translationToolStripMenuItem.Name = "translationToolStripMenuItem";
-            this.translationToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.translationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.translationToolStripMenuItem.Text = "Translation";
+            this.translationToolStripMenuItem.Click += new System.EventHandler(this.translationToolStripMenuItem_Click);
             // 
             // rotationToolStripMenuItem
             // 

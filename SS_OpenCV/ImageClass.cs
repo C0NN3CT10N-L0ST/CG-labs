@@ -188,6 +188,47 @@ namespace CG_OpenCV
             }
         }
 
-        // public static void 
+        public static void Translation(Image<Bgr, byte> img, Image<Bgr, byte> imgCopy, int dx, int dy) {
+            unsafe {
+                MIplImage m = img.MIplImage;
+                MIplImage mC = imgCopy.MIplImage;
+
+                byte* dataPtr = (byte*) m.imageData.ToPointer();
+                byte* dataPtrC = (byte*) mC.imageData.ToPointer();
+
+                byte blue, green, red;
+                int width = img.Width;
+                int height = img.Height;
+                int wStep = m.widthStep;
+                int nChan = m.nChannels;
+                int padding = m.widthStep - nChan * m.width;
+                int x, y, nx, ny;
+
+                if (nChan == 3) {
+                    for (y = 0; y < height; y++) {
+                        for (x = 0; x < width; x++) {
+                            nx = x - dx;
+                            ny = y - dy;
+
+                            if ((nx > 0) && (ny > 0) && (nx < width && ny < height)) {
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        public static void Rotation(Image<Bgr, byte> img, Image<Bgr, byte> imgCopy, float angle) {
+            // TODO
+        }
+
+        public static void Scale(Image<Bgr, byte> img, Image<Bgr, byte> imgCopy, float scaleFactor) {
+            // TODO
+        }
+
+        public static void Scale_point_xy(Image<Bgr, byte> img, Image<Bgr, byte> imgCopy, float scaleFactor, int centerX, int centerY) {
+            // TODO
+        }
     }
 }
