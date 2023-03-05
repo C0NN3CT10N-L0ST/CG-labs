@@ -201,7 +201,7 @@ namespace CG_OpenCV
             // copy Undo Image
             imgUndo = img.Copy();
 
-            ImageClass.RedGrayscale(img);
+            ImageClass.RedChannel(img);
 
             ImageViewer.Image = img.Bitmap;
             ImageViewer.Refresh();
@@ -224,7 +224,17 @@ namespace CG_OpenCV
             // copy Undo Image
             imgUndo = img.Copy();
 
-            ImageClass.AdjustBrightnessAndContrast(img);
+            // Gets user input
+            InputBox brightnessInput = new InputBox("Brightness (0-255):");
+            brightnessInput.ShowDialog();
+
+            InputBox contrastInput = new InputBox("Contrast (0-3):");
+            contrastInput.ShowDialog();
+
+            int brightness = Convert.ToInt32(brightnessInput.ValueTextBox.Text);
+            float contrast = float.Parse(contrastInput.ValueTextBox.Text);
+
+            ImageClass.BrightContrast(img, brightness, contrast);
 
             ImageViewer.Image = img.Bitmap;
             ImageViewer.Refresh();

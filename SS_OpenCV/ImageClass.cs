@@ -125,7 +125,7 @@ namespace CG_OpenCV
         /// Obtains the RED color component of an image (direct memory access)
         /// </summary>
         /// <param name="img"></param>
-        public static void RedGrayscale(Image<Bgr, byte> img)
+        public static void RedChannel(Image<Bgr, byte> img)
         {
             unsafe
             {
@@ -158,18 +158,8 @@ namespace CG_OpenCV
         /// Fast - Direct memory access
         /// </summary>
         /// <param name="img"></param>
-        public static void AdjustBrightnessAndContrast(Image<Bgr, byte> img)
+        public static void BrightContrast(Image<Bgr, byte> img, int brightness, double contrast)
         {
-            // Gets user input
-            InputBox brightnessInput = new InputBox("Brightness (0-255):");
-            brightnessInput.ShowDialog();
-
-            InputBox contrastInput = new InputBox("Contrast (0-3):");
-            contrastInput.ShowDialog();
-
-            int brightness = Convert.ToInt32(brightnessInput.ValueTextBox.Text);
-            float contrast = float.Parse(contrastInput.ValueTextBox.Text);
-
             unsafe
             {
                 MIplImage m = img.MIplImage;
