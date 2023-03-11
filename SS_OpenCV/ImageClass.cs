@@ -4,6 +4,8 @@ using System.Text;
 using Emgu.CV.Structure;
 using Emgu.CV;
 using System.Windows.Forms;
+using System.Diagnostics.Contracts;
+using System.Diagnostics;
 
 namespace CG_OpenCV
 {
@@ -196,12 +198,10 @@ namespace CG_OpenCV
                 byte* dataPtr = (byte*) m.imageData.ToPointer();
                 byte* dataPtrC = (byte*) mC.imageData.ToPointer();
 
-                byte blue, green, red;
                 int width = img.Width;
                 int height = img.Height;
                 int wStep = m.widthStep;
                 int nChan = m.nChannels;
-                int padding = m.widthStep - nChan * m.width;
                 int x, y, nx, ny;
 
                 if (nChan == 3) {
@@ -210,8 +210,14 @@ namespace CG_OpenCV
                             nx = x - dx;
                             ny = y - dy;
 
-                            if ((nx > 0) && (ny > 0) && (nx < width && ny < height)) {
-
+                            if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+                                (dataPtr + x * nChan + y * wStep)[0] = (byte)(dataPtrC + nx * nChan + ny * wStep)[0];
+                                (dataPtr + x * nChan + y * wStep)[1] = (byte)(dataPtrC + nx * nChan + ny * wStep)[1];
+                                (dataPtr + x * nChan + y * wStep)[2] = (byte)(dataPtrC + nx * nChan + ny * wStep)[2];
+                            } else {
+                                (dataPtr + x * nChan + y * wStep)[0] = (byte)0;
+                                (dataPtr + x * nChan + y * wStep)[1] = (byte)0;
+                                (dataPtr + x * nChan + y * wStep)[2] = (byte)0;
                             }
                         }
                     }

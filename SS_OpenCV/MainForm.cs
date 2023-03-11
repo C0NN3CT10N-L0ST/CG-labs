@@ -251,7 +251,25 @@ namespace CG_OpenCV
             // copy Undo image
             imgUndo = img.Copy();
 
-            
+            // Gets user input
+            InputBox translationInputX = new InputBox("Translation (X axis)");
+            translationInputX.ShowDialog();
+
+            InputBox translationInputY = new InputBox("Translation (Y axis)");
+            translationInputY.ShowDialog();
+
+            int translationX = Convert.ToInt32(translationInputX.ValueTextBox.Text);
+            int translationY = Convert.ToInt32(translationInputY.ValueTextBox.Text);
+
+            // Mipl Image to store result
+            Image<Bgr, byte> imgCopy = img.Copy();
+
+            ImageClass.Translation(img, imgCopy, translationX, translationY);
+
+            ImageViewer.Image = img.Bitmap;
+            ImageViewer.Refresh();
+
+            Cursor = Cursors.Default;
         }
     }
 }
