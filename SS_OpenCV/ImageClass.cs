@@ -226,7 +226,27 @@ namespace CG_OpenCV
         }
 
         public static void Rotation(Image<Bgr, byte> img, Image<Bgr, byte> imgCopy, float angle) {
-            // TODO
+            unsafe {
+                MIplImage m = img.MIplImage;
+                MIplImage mC = imgCopy.MIplImage;
+
+                byte* dataPtr = (byte*)m.imageData.ToPointer();
+                byte* dataPtrC = (byte*)mC.imageData.ToPointer();
+
+                int width = img.Width;
+                int height = img.Height;
+                int wStep = m.widthStep;
+                int nChan = m.nChannels;
+                int x, y, nx, ny;
+
+                if (nChan == 3) {
+                    for (y = 0; y < height; y++) {
+                        for (x = 0; x < width; x++) {
+                             // TODO
+                        }
+                    }
+                }
+            }
         }
 
         public static void Scale(Image<Bgr, byte> img, Image<Bgr, byte> imgCopy, float scaleFactor) {

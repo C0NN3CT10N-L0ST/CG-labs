@@ -261,10 +261,36 @@ namespace CG_OpenCV
             int translationX = Convert.ToInt32(translationInputX.ValueTextBox.Text);
             int translationY = Convert.ToInt32(translationInputY.ValueTextBox.Text);
 
-            // Mipl Image to store result
+            // Original image copy
             Image<Bgr, byte> imgCopy = img.Copy();
 
             ImageClass.Translation(img, imgCopy, translationX, translationY);
+
+            ImageViewer.Image = img.Bitmap;
+            ImageViewer.Refresh();
+
+            Cursor = Cursors.Default;
+        }
+
+        private void rotationToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (img == null)
+                return;
+
+            Cursor = Cursors.WaitCursor;
+
+            // copy Undo image
+            imgUndo = img.Copy();
+
+            // Gets user input
+            InputBox angleInDegrees = new InputBox("Angle (degrees)");
+            angleInDegrees.ShowDialog();
+
+            int angle = Convert.ToInt32(angleInDegrees.ValueTextBox.Text);
+
+            // Original image copy
+            Image<Bgr, Byte> imgCopy = img.Copy();
+
+            ImageClass.Rotation(img, imgCopy, angle);
 
             ImageViewer.Image = img.Bitmap;
             ImageViewer.Refresh();
