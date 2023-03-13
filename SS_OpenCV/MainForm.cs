@@ -285,12 +285,12 @@ namespace CG_OpenCV
             InputBox angleInDegrees = new InputBox("Angle (degrees)");
             angleInDegrees.ShowDialog();
 
-            int angle = Convert.ToInt32(angleInDegrees.ValueTextBox.Text);
+            float angleInRad = (float)(Convert.ToInt32(angleInDegrees.ValueTextBox.Text) * Math.PI / 180);
 
             // Original image copy
             Image<Bgr, Byte> imgCopy = img.Copy();
 
-            ImageClass.Rotation(img, imgCopy, angle);
+            ImageClass.Rotation(img, imgCopy, angleInRad);
 
             ImageViewer.Image = img.Bitmap;
             ImageViewer.Refresh();

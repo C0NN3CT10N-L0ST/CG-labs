@@ -37,3 +37,17 @@ C:\Users\Alex\Documents\GitHub (AL3X-M0NST3R)\CG-labs\SS_OpenCV\obj\Debug\CG_Ope
 C:\Users\Alex\Documents\GitHub (AL3X-M0NST3R)\CG-labs\SS_OpenCV\obj\Debug\CG_OpenCV.csproj.CopyComplete
 C:\Users\Alex\Documents\GitHub (AL3X-M0NST3R)\CG-labs\SS_OpenCV\obj\Debug\CG_OpenCV.exe
 C:\Users\Alex\Documents\GitHub (AL3X-M0NST3R)\CG-labs\SS_OpenCV\obj\Debug\CG_OpenCV.pdb
+C:\Users\itsamemario\Desktop\CG-labs\SS_OpenCV\bin\Debug\CG_OpenCV.exe.config
+C:\Users\itsamemario\Desktop\CG-labs\SS_OpenCV\bin\Debug\CG_OpenCV.exe
+C:\Users\itsamemario\Desktop\CG-labs\SS_OpenCV\bin\Debug\CG_OpenCV.pdb
+C:\Users\itsamemario\Desktop\CG-labs\SS_OpenCV\obj\Debug\CG_OpenCV.csproj.AssemblyReference.cache
+C:\Users\itsamemario\Desktop\CG-labs\SS_OpenCV\obj\Debug\CG_OpenCV.csproj.SuggestedBindingRedirects.cache
+C:\Users\itsamemario\Desktop\CG-labs\SS_OpenCV\obj\Debug\CG_OpenCV.AuthorsForm.resources
+C:\Users\itsamemario\Desktop\CG-labs\SS_OpenCV\obj\Debug\CG_OpenCV.InputBox.resources
+C:\Users\itsamemario\Desktop\CG-labs\SS_OpenCV\obj\Debug\CG_OpenCV.MainForm.resources
+C:\Users\itsamemario\Desktop\CG-labs\SS_OpenCV\obj\Debug\CG_OpenCV.Properties.Resources.resources
+C:\Users\itsamemario\Desktop\CG-labs\SS_OpenCV\obj\Debug\CG_OpenCV.csproj.GenerateResource.cache
+C:\Users\itsamemario\Desktop\CG-labs\SS_OpenCV\obj\Debug\CG_OpenCV.csproj.CoreCompileInputs.cache
+C:\Users\itsamemario\Desktop\CG-labs\SS_OpenCV\obj\Debug\CG_OpenCV.csproj.CopyComplete
+C:\Users\itsamemario\Desktop\CG-labs\SS_OpenCV\obj\Debug\CG_OpenCV.exe
+C:\Users\itsamemario\Desktop\CG-labs\SS_OpenCV\obj\Debug\CG_OpenCV.pdb

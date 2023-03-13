@@ -126,7 +126,7 @@ namespace CG_OpenCV
         /// <summary>
         /// Obtains the RED color component of an image (direct memory access)
         /// </summary>
-        /// <param name="img"></param>
+        /// <param name="img">image</param>
         public static void RedChannel(Image<Bgr, byte> img)
         {
             unsafe
@@ -159,7 +159,7 @@ namespace CG_OpenCV
         /// Adjusts brightness and contrast levels of an image from user input
         /// Fast - Direct memory access
         /// </summary>
-        /// <param name="img"></param>
+        /// <param name="img">image</param>
         public static void BrightContrast(Image<Bgr, byte> img, int brightness, double contrast)
         {
             unsafe
@@ -190,6 +190,13 @@ namespace CG_OpenCV
             }
         }
 
+        /// <summary>
+        /// Transforms the image by translation by the given offset
+        /// </summary>
+        /// <param name="img">original image</param>
+        /// <param name="imgCopy">copy of original image</param>
+        /// <param name="dx">X offset</param>
+        /// <param name="dy">Y offset</param>
         public static void Translation(Image<Bgr, byte> img, Image<Bgr, byte> imgCopy, int dx, int dy) {
             unsafe {
                 MIplImage m = img.MIplImage;
@@ -225,6 +232,12 @@ namespace CG_OpenCV
             }
         }
 
+        /// <summary>
+        /// Transforms image by translation by the given angle using inverse rotation
+        /// </summary>
+        /// <param name="img">original image</param>
+        /// <param name="imgCopy">copy of original image</param>
+        /// <param name="angle">angle in rad</param>
         public static void Rotation(Image<Bgr, byte> img, Image<Bgr, byte> imgCopy, float angle) {
             unsafe {
                 MIplImage m = img.MIplImage;
@@ -238,11 +251,25 @@ namespace CG_OpenCV
                 int wStep = m.widthStep;
                 int nChan = m.nChannels;
                 int x, y, nx, ny;
+                int halfW = width / 2;
+                int halfH = height / 2;
 
                 if (nChan == 3) {
                     for (y = 0; y < height; y++) {
                         for (x = 0; x < width; x++) {
-                             // TODO
+                            // Interpolation by truncature
+                            nx = (int) ((x - halfW) * Math.Cos(angle) - (halfH - y) * Math.Sin(angle) + halfW);
+                            ny = (int) (halfH - (x - halfW) * Math.Sin(angle) - (halfH - y) * Math.Cos(angle));
+
+                            if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+                                (dataPtr + x * nChan + y * wStep)[0] = (byte)(dataPtrC + nx * nChan + ny * wStep)[0];
+                                (dataPtr + x * nChan + y * wStep)[1] = (byte)(dataPtrC + nx * nChan + ny * wStep)[1];
+                                (dataPtr + x * nChan + y * wStep)[2] = (byte)(dataPtrC + nx * nChan + ny * wStep)[2];
+                            } else {
+                                (dataPtr + x * nChan + y * wStep)[0] = (byte)0;
+                                (dataPtr + x * nChan + y * wStep)[1] = (byte)0;
+                                (dataPtr + x * nChan + y * wStep)[2] = (byte)0;
+                            }
                         }
                     }
                 }
