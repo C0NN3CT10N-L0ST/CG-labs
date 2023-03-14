@@ -311,9 +311,5 @@ namespace CG_OpenCV
                 }
             }
         }
-
-        public static void Scale_point_xy(Image<Bgr, byte> img, Image<Bgr, byte> imgCopy, float scaleFactor, int centerX, int centerY) {
-            // TODO
-        }
     }
 }
