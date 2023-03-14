@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.Structure;
@@ -242,6 +243,11 @@ namespace CG_OpenCV
             Cursor = Cursors.Default;
         }
 
+        /// <summary>
+        /// Image translation from user input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void translationToolStripMenuItem_Click(object sender, EventArgs e) {
             if (img == null)
                 return;
@@ -272,6 +278,11 @@ namespace CG_OpenCV
             Cursor = Cursors.Default;
         }
 
+        /// <summary>
+        /// Image rotation from user input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void rotationToolStripMenuItem_Click(object sender, EventArgs e) {
             if (img == null)
                 return;
@@ -291,6 +302,37 @@ namespace CG_OpenCV
             Image<Bgr, Byte> imgCopy = img.Copy();
 
             ImageClass.Rotation(img, imgCopy, angleInRad);
+
+            ImageViewer.Image = img.Bitmap;
+            ImageViewer.Refresh();
+
+            Cursor = Cursors.Default;
+        }
+
+        /// <summary>
+        /// Image scaling from user input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void zoomToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (img == null)
+                return;
+
+            Cursor = Cursors.WaitCursor;
+
+            // copy Undo image
+            imgUndo = img.Copy();
+
+            // Gets user input
+            InputBox scaleFactor = new InputBox("Scale factor ('1' original size)");
+            scaleFactor.ShowDialog();
+
+            float scaleFactorVal = (float)Convert.ToDouble(scaleFactor.ValueTextBox.Text);
+
+            // Original image copy
+            Image<Bgr, byte> imgCopy = img.Copy();
+
+            ImageClass.Scale(img, imgCopy, scaleFactorVal);
 
             ImageViewer.Image = img.Bitmap;
             ImageViewer.Refresh();

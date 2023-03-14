@@ -277,7 +277,39 @@ namespace CG_OpenCV
         }
 
         public static void Scale(Image<Bgr, byte> img, Image<Bgr, byte> imgCopy, float scaleFactor) {
-            // TODO
+            unsafe {
+                MIplImage m = img.MIplImage;
+                MIplImage mC = imgCopy.MIplImage;
+
+                byte* dataPtr = (byte*)m.imageData.ToPointer();
+                byte* dataPtrC = (byte*)mC.imageData.ToPointer();
+
+                int width = img.Width;
+                int height = img.Height;
+                int wStep = m.widthStep;
+                int nChan = m.nChannels;
+                int x, y, nx, ny;
+
+                if (nChan == 3) {
+                    for (y = 0; y < height; y++) {
+                        for (x = 0; x < width; x++) {
+                            // Interpolation by truncature
+                            nx = (int)(x / scaleFactor);
+                            ny = (int)(y / scaleFactor);
+
+                            if (nx >= 0 && nx < width && ny >= 0 && ny < height) {
+                                (dataPtr + x * nChan + y * wStep)[0] = (byte)(dataPtrC + nx * nChan + ny * wStep)[0];
+                                (dataPtr + x * nChan + y * wStep)[1] = (byte)(dataPtrC + nx * nChan + ny * wStep)[1];
+                                (dataPtr + x * nChan + y * wStep)[2] = (byte)(dataPtrC + nx * nChan + ny * wStep)[2];
+                            } else {
+                                (dataPtr + x * nChan + y * wStep)[0] = (byte)0;
+                                (dataPtr + x * nChan + y * wStep)[1] = (byte)0;
+                                (dataPtr + x * nChan + y * wStep)[2] = (byte)0;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         public static void Scale_point_xy(Image<Bgr, byte> img, Image<Bgr, byte> imgCopy, float scaleFactor, int centerX, int centerY) {
